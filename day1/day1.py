@@ -16,6 +16,10 @@ print(sum)
 
 # 2 stars
 
+with open("input.txt", "r") as f:
+    lines = f.readlines()
+    lines = [line.strip() for line in lines]
+
 sum = 0
 numbers_in_letters = {
     "one": "1",
@@ -28,10 +32,14 @@ numbers_in_letters = {
     "eight": "8",
     "nine": "9"
 }
+
 for line in lines:
-    for key in numbers_in_letters.keys():
-        if key in line:
-            line = line.replace(key, numbers_in_letters[key])
+    
+    for i in range(len(line)):
+        for key in numbers_in_letters.keys():
+            if key in line[i:i+5]:
+                line = line.replace(key, numbers_in_letters[key])
+    
     line = re.sub("[^0-9]", "", line)
     res = line[0] + line[-1]
     sum += int(res)
